@@ -3,7 +3,7 @@ class BaseController{
 	/** Reference to the service object. */
 	protected $service;
 
-	/** Refence to a controller. */
+	/** Reference to a controller. */
 	protected $controller;
 
 	/** Reference to an action to be formed. */

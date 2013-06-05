@@ -574,3 +574,7 @@ span.disabled {
 span {
 	vertical-align: top;
 }
+.detailV{
+	color:#004600;
+	font-weight:bold;
+}

@@ -9,7 +9,7 @@ if(isset($_SESSION['user'])){
     		<?php include_once HOME.DS.'views'.DS.'menu.php';?>
     		<div class="content layout">
     			<div class="breadcrumb">
-    				<span class="text"><a href="<?php echo BASEURL;?>" title="Back to home">Home</a></span>
+    				<span class="text"><a href="<?php echo BASEURL;?>/dashboard/listing" title="Back to home">Home</a></span>
     				<span class="arrow"></span>
     				<span class="text"><a href="<?php echo BASEURL;?>/dashboard/listing" title="Back to listing">Dashboard</a></span>
     				<span class="arrow"></span>

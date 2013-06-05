@@ -8,7 +8,7 @@ class BuddyController extends BaseController{
 	var $dashboardCategoryService;
 
 	public function __construct($service, $action){
-		parent::__construct($service, $action);
+		parent::__construct($service, $action);//just like a call to super
 		$this->setService($service);
 		$this->dashboardCategoryService = new DashcategoryService();
 	}
@@ -137,8 +137,16 @@ class BuddyController extends BaseController{
 			}
 		}
 
+		$cpanelService = new CpanelService();
+		$seedings = $cpanelService->getSeedings();
+
+		if($seedings == null){
+			$seedings = array();
+		}
+
 		$this->setView('buddy'.DS.'add');
 		$this->view->set(SYSTEM_ERROR_MESSAGE, $message);
+		$this->view->set('seedings', $seedings);
 		$this->view->set('saveForm', $_POST);
 		$this->view->set('dashcategory', $this->getDashboardCategory($dashboardCategoryId));
 		return $this->view->output();
@@ -745,6 +753,37 @@ class BuddyController extends BaseController{
 
 		$this->setView('buddy'.DS.'usage');
 		$this->view->set('buddy', $buddy);
+		return $this->view->output();
+	}
+	
+	/**added the function to be able to view details*/
+	public function details($buddyId){
+		$this->setService('buddy');
+		$buddy = $this->service->getBuddyById($buddyId);
+		$buddy->setDashboardCategory($this->getDashboardCategory($this->service->getDashboardCategoryIdByBuddyId($buddyId)));
+		$locations = $this->service->getAllLocationsByBuddyId($buddyId);
+
+		if(empty($locations)){
+			$locations = array();
+		}
+
+		$start = $this->service->offset;
+		$end= $this->service->offset + $this->service->maxLimit ;
+		if($this->service->offset == 0){
+			$start = 1;
+		}else{
+			++$start;
+			--$end;
+		}
+		if($end > $this->service->totalCount){
+			$end = $this->service->totalCount;
+		}
+
+		$this->setView('buddy'.DS.'viewNew');
+		$this->view->set('pgtotal', $start.' - '. $end. ' of '.$this->service->totalCount);
+		$this->view->set('offset', $this->service->offset.','.$this->service->totalCount);
+		$this->view->set('buddy', $buddy);
+		$this->view->set('locations', $locations);
 		return $this->view->output();
 	}
 }

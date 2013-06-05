@@ -69,7 +69,7 @@ class BuddyService extends BaseDAO{
 
 	public function save($newbuddy){
 		try{
-			$sql = "INSERT INTO buddy(date_last_updated, record_status, name, tagline, address, telphone, email, fax, url, dashboard_category_id) VALUES(:datelastupdated, :status, :name, :tagline, :address, :telphone, :email, :fax, :url, :dasboardcategoryid)";
+			$sql = "INSERT INTO buddy(date_last_updated, record_status, name, tagline, address, telphone, email, fax, url, dashboard_category_id, seed) VALUES(:datelastupdated, :status, :name, :tagline, :address, :telphone, :email, :fax, :url, :dasboardcategoryid, :seed)";
 			$stmt = $this->db->prepare ($sql);
 			$stmt->bindValue("datelastupdated", $newbuddy->dateupdated, PDO::PARAM_STR );
 			$stmt->bindValue("status", (int)$newbuddy->status, PDO::PARAM_STR );
@@ -80,8 +80,8 @@ class BuddyService extends BaseDAO{
 			$stmt->bindValue("email", $newbuddy->email, PDO::PARAM_STR );
 			$stmt->bindValue("fax", $newbuddy->fax, PDO::PARAM_STR );
 			$stmt->bindValue("url", $newbuddy->url, PDO::PARAM_STR );
+			$stmt->bindValue("dasboardcategoryid", $newbuddy->getDashboardCategory()->id, PDO::PARAM_STR );			
 			$stmt->bindValue("seed", $newbuddy->seed, PDO::PARAM_STR );
-			$stmt->bindValue("dasboardcategoryid", $newbuddy->getDashboardCategory()->id, PDO::PARAM_STR );
 			$stmt->execute();
 			return true;
 		}catch (PDOException $e){

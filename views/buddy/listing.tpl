@@ -7,7 +7,7 @@ if(isset($_SESSION['user'])){
     		<?php include_once HOME.DS.'views'.DS.'menu.php';?>
     		<div class="content layout">
     			<div class="breadcrumb">
-    				<span class="text"><a href="<?php echo BASEURL;?>" title="back to home">Home</a></span>
+    				<span class="text"><a href="<?php echo  BASEURL . DS . 'dashboard' . DS . 'index';?>" title="back to home">Home</a></span>
     				<span class="arrow"></span>
     				<span class="text"><a href="<?php echo BASEURL;?>/dashboard/listing" title="back to dashboard">Dashboard</a></span>
     				<span class="arrow"></span>
@@ -57,7 +57,7 @@ if(isset($_SESSION['user'])){
     				<a id="btnAdd" class="uiStripButton" href="<?php echo BASEURL;?>/buddy/listing/add/<?php echo $dashcategory->getId();?>" title="add buddy">Add</a>
     				<a id="btnEdit" class="uiStripButton" href="<?php echo BASEURL;?>/buddy/listing/edit" title="edit buddy">Edit</a>
 					<a id="btnDelete" class="uiStripButton" href="<?php echo BASEURL;?>/buddy/listing/delete" title="delete buddy">Delete</a>
-					<a id="btnDetailed" class="uiStripButton" href="<?php echo BASEURL;?>/buddy/listing/details" title="View buddy Details">View Deatails</a>
+					<a id="btnDetailed" class="uiStripButton" href="<?php echo BASEURL;?>/buddy/listing/details" title="View buddy Details">View Details</a>
 					
 					<div class="pagination">
 						<span style="float: left;margin-right: 10px;"><?php echo $pgtotal;?></span>
