@@ -762,6 +762,7 @@ class BuddyController extends BaseController{
 		$buddy = $this->service->getBuddyById($buddyId);
 		$buddy->setDashboardCategory($this->getDashboardCategory($this->service->getDashboardCategoryIdByBuddyId($buddyId)));
 		$locations = $this->service->getAllLocationsByBuddyId($buddyId);
+		$image=preg_replace('/\s+/', '', strtolower($buddy->name));
 
 		if(empty($locations)){
 			$locations = array();
@@ -784,6 +785,7 @@ class BuddyController extends BaseController{
 		$this->view->set('offset', $this->service->offset.','.$this->service->totalCount);
 		$this->view->set('buddy', $buddy);
 		$this->view->set('locations', $locations);
+		$this->view->set('image', $image);
 		return $this->view->output();
 	}
 }
